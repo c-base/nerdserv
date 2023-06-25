@@ -1,9 +1,8 @@
 provider "proxmox" {
-  pm_api_url      = "https://nerdserv.cbrp3.c-base.org:8006/api2/json"
-  pm_tls_insecure = true
+  endpoint = "https://nerdserv.cbrp3.c-base.org:8006"
+  insecure = true
 
-  pm_api_token_id     = var.pm_token.id
-  pm_api_token_secret = var.pm_token.secret
+  api_token = format("%s=%s", var.pm_token.id, var.pm_token.secret)
 }
 
 module "home_assistant_vm" {
@@ -21,7 +20,8 @@ module "home_assistant_vm" {
   memory = 8192
 
   disk = {
-    size    = "64G"
+    // gigabytes
+    size    = 64
     storage = local.storage.disk
   }
 

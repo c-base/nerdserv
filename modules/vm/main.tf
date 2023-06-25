@@ -1,67 +1,74 @@
 terraform {
   required_providers {
     proxmox = {
-      source  = "Telmate/proxmox"
-      version = "2.9.14"
+      source  = "bpg/proxmox"
+      version = "0.21.1"
     }
   }
 }
 
-resource "proxmox_vm_qemu" "vm" {
-  target_node = var.node
-  pool        = var.pool
+resource "proxmox_virtual_environment_vm" "vm" {
+  node_name = var.node
+  pool_id   = var.pool
 
   name = var.name
-  iso  = "none"
+  #  iso  = "none"
 
-  cores  = 4
-  memory = 8192
-  numa   = true
-
-  bios     = "ovmf"
-  boot     = "cdn"
-  bootdisk = "scsi0"
-
-  # teraform provider is broken and tries to apply every time
-  #  machine = "q35"
-  qemu_os = "l26"
-
-  agent = var.qemu_agent ? 1 : 0
-
-  oncreate = false
-  onboot   = true
-
-  # disable because we don't have an xserver
-  tablet = false
-  vga {
-    type = "std"
+  cpu {
+    cores = 4
+    type  = "host"
+    numa  = true
   }
 
-  scsihw = "virtio-scsi-single"
+  memory {
+    dedicated = 8192
+  }
+
+  bios       = "ovmf"
+  boot_order = ["scsi0"]
+
+  machine = "q35"
+  operating_system {
+    type = "l26"
+  }
+
+  agent {
+    enabled = true
+  }
+
+  on_boot = true
+
+  # disable because we don't have an xserver
+  tablet_device = false
+  vga {
+    enabled = true
+    type    = "std"
+  }
+
+  scsi_hardware = "virtio-scsi-single"
 
   # data disk
   disk {
-    size    = var.disk.size
-    storage = var.disk.storage
+    size         = var.disk.size
+    datastore_id = var.disk.storage
 
-    type = "scsi"
+    file_format = "raw"
 
-    iothread = 1
-    ssd      = 1
+    interface = "scsi0"
+
+    iothread = true
+    ssd      = true
     discard  = "on"
   }
 
-  # teraform provider doesn't support this rn
   # efi disk
-  #  disk {
-  #    size = "4M"
-  #    storage = var.disk.storage
-  #
-  #    type = "efidisk"
-  #  }
+  efi_disk {
+    datastore_id = var.disk.storage
+    size         = "1M"
+  }
 
-  network {
-    model  = "virtio"
+  network_device {
     bridge = var.network.bridge
+    model  = "virtio"
   }
 }
