@@ -42,12 +42,12 @@ variable "network" {
 variable "operating_system" {
   type = object({
     template_file_id = string
-    type = string
+    type             = string
   })
   description = "operating sysytem configuration"
 }
 
 variable "ssh_keys" {
-  type = list(string)
+  type        = list(string)
   description = "ssh keys for the root user"
 }

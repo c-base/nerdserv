@@ -3,7 +3,7 @@ data "proxmox_virtual_environment_role" "admin_role" {
 }
 
 resource "proxmox_virtual_environment_user" "hrmny" {
-  user_id  = "hrmny@pam"
+  user_id = "hrmny@pam"
 
   acl {
     path      = "/"
@@ -13,7 +13,7 @@ resource "proxmox_virtual_environment_user" "hrmny" {
 }
 
 resource "proxmox_virtual_environment_user" "ijon" {
-  user_id  = "ijon@pam"
+  user_id = "ijon@pam"
 
   acl {
     path      = "/"

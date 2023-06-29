@@ -21,7 +21,7 @@ module "docker_lxc" {
 
   operating_system = {
     template_file_id = proxmox_virtual_environment_file.alpine_cloud_template.id
-    type = "alpine"
+    type             = "alpine"
   }
 
   ssh_keys = [

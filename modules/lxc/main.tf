@@ -27,7 +27,7 @@ resource "proxmox_virtual_environment_container" "container" {
   }
 
   mount_point {
-    path = "/data"
+    path   = "/data"
     volume = "/datapool/config/container/docker"
   }
 
