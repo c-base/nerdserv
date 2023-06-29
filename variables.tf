@@ -1,6 +1,13 @@
-variable "pm_token" {
+#variable "pm_token" {
+#  type = object({
+#    id     = string
+#    secret = string
+#  })
+#}
+
+variable "credentials" {
   type = object({
-    id     = string
-    secret = string
+    username = string
+    password = string
   })
 }

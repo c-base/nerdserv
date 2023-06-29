@@ -2,30 +2,17 @@ provider "proxmox" {
   endpoint = "https://nerdserv.cbrp3.c-base.org:8006"
   insecure = true
 
-  api_token = format("%s=%s", var.pm_token.id, var.pm_token.secret)
+#  api_token = format("%s=%s", var.pm_token.id, var.pm_token.secret)
+  username = var.credentials.username
+  password = var.credentials.password
 }
 
-module "home_assistant_vm" {
-  source = "./modules/vm"
+module "proxmox" {
+  source = "./proxmox"
 
-  name = "home-assistant"
   node = local.node
+  storage = local.storage
+  network = local.network
 
-  # teraform provider is broken and tries to apply every time
-  # pool = local.pool
-
-  qemu_agent = true
-
-  cores  = 4
-  memory = 8192
-
-  disk = {
-    // gigabytes
-    size    = 64
-    storage = local.storage.disk
-  }
-
-  network = {
-    bridge = local.network.bridge
-  }
+  users = local.users
 }

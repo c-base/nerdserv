@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     proxmox = {
-      source  = "bpg/proxmox"
-      version = "0.21.1"
+      source  = "ForsakenHarmony/proxmox"
+      version = "0.0.0-canary.5"
     }
   }
 }
@@ -12,16 +12,16 @@ resource "proxmox_virtual_environment_vm" "vm" {
   pool_id   = var.pool
 
   name = var.name
-  #  iso  = "none"
 
   cpu {
-    cores = 4
+    cores = var.cores
+    // "x86-64-v2-AES" is best if live migration is needed
     type  = "host"
     numa  = true
   }
 
   memory {
-    dedicated = 8192
+    dedicated = var.memory
   }
 
   bios       = "ovmf"
