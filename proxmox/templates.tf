@@ -9,3 +9,8 @@ resource "proxmox_virtual_environment_file" "alpine_cloud_template" {
     file_name = "alpine-3.18-cloud-amd64_20230625.tar.xz"
   }
 }
+
+data "proxmox_virtual_environment_vm" "debian_cloud_vm_template" {
+  node_name = var.node
+  vm_id     = 9000
+}
