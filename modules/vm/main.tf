@@ -11,6 +11,9 @@ resource "proxmox_virtual_environment_vm" "vm" {
   node_name = var.node
   pool_id   = var.pool
 
+  vm_id    = var.vm_id
+  template = var.template
+
   name = var.name
 
   cpu {
@@ -70,5 +73,24 @@ resource "proxmox_virtual_environment_vm" "vm" {
   network_device {
     bridge = var.network.bridge
     model  = "virtio"
+  }
+
+  dynamic "clone" {
+    for_each = var.clone != null ? [var.clone] : []
+    content {
+      datastore_id = var.disk.storage
+      vm_id        = clone.value
+    }
+  }
+
+  dynamic "initialization" {
+    for_each = var.ssh_keys != null ? [var.ssh_keys] : []
+    content {
+      datastore_id = var.disk.storage
+
+      user_account {
+        keys = clone.value
+      }
+    }
   }
 }

@@ -9,6 +9,12 @@ variable "pool" {
   description = "the proxmox pool the VM should be assigned to"
 }
 
+variable "vm_id" {
+  type        = string
+  default     = null
+  description = "set a specific ID for the VM"
+}
+
 variable "name" {
   type        = string
   description = "the name of the vm"
@@ -43,4 +49,22 @@ variable "qemu_agent" {
   type        = bool
   default     = true
   description = "whether to enable the QEMU agent (needs support from the guest)"
+}
+
+variable "clone" {
+  type        = string
+  default     = null
+  description = "clone the vm with the given ID"
+}
+
+variable "ssh_keys" {
+  type        = string
+  default     = null
+  description = "clone the vm with the given ID"
+}
+
+variable "template" {
+  type        = bool
+  default     = false
+  description = "mark the vm as a template"
 }
