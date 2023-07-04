@@ -4,10 +4,7 @@ module "home_assistant_vm" {
   name = "home-assistant"
   node = var.node
 
-  # teraform provider is broken and tries to apply every time
-  # pool = local.pool
-
-  qemu_agent = true
+  pool = var.pool
 
   cores  = 4
   memory = 8192

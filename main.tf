@@ -9,7 +9,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "ForsakenHarmony/proxmox"
-      version = "0.0.0-canary.5"
+      version = "0.0.0-canary.8"
     }
   }
 

@@ -41,6 +41,6 @@ variable "network" {
 
 variable "qemu_agent" {
   type        = bool
-  default     = false
+  default     = true
   description = "whether to enable the QEMU agent (needs support from the guest)"
 }

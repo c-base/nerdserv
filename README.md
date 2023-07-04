@@ -29,13 +29,19 @@ allows Terraform to provision proxmox VMs and LXC containers through proxmox's A
 1. If you have not done so, initialize Terraform by running
    `terraform init`.
 
-2. Format the Terraform config files before committing.
+2. Validate the config BEFORE committing.
+
+   ```bash
+   terraform validate
+   ```
+
+3. Format the Terraform config files BEFORE committing.
 
    ```bash
    make format
    ```
 
-3. Commit the changes and create a pull request, Terraform cloud should pick it
+4. Commit the changes and create a pull request, Terraform cloud should pick it
    up and create a plan.
 
-4. Merge the pull request, everything will get applied to
+5. Merge the pull request, everything will get applied to
