@@ -2,12 +2,11 @@ module "netboot_vm" {
   source = "../modules/vm"
 
   name = "netboot"
+
   node = var.node
+  pool = var.pool
 
-  # teraform provider is broken and tries to apply every time
-  # pool = local.pool
-
-  qemu_agent = true
+  clone = data.proxmox_virtual_environment_vm.debian_cloud_vm_template.vm_id
 
   cores  = 1
   memory = 2048

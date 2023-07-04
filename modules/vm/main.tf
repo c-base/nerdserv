@@ -89,7 +89,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
       datastore_id = var.disk.storage
 
       user_account {
-        keys = clone.value
+        keys = initialization.value
       }
     }
   }

@@ -58,7 +58,7 @@ variable "clone" {
 }
 
 variable "ssh_keys" {
-  type        = string
+  type        = list(string)
   default     = null
   description = "clone the vm with the given ID"
 }
