@@ -2,7 +2,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "ForsakenHarmony/proxmox"
-      version = "0.0.0-canary.8"
+      version = "0.0.0-canary.16"
     }
   }
 }
@@ -36,7 +36,8 @@ resource "proxmox_virtual_environment_vm" "vm" {
   }
 
   agent {
-    enabled = true
+    enabled = var.qemu_agent
+    trim    = true
   }
 
   on_boot = true
@@ -75,6 +76,8 @@ resource "proxmox_virtual_environment_vm" "vm" {
     model  = "virtio"
   }
 
+  started = var.started
+
   dynamic "clone" {
     for_each = var.clone != null ? [var.clone] : []
     content {
@@ -88,9 +91,29 @@ resource "proxmox_virtual_environment_vm" "vm" {
     content {
       datastore_id = var.disk.storage
 
+      # this is necessary when using machine type q35 or ovmf bios
+      interface    = "scsi1"
+
       user_account {
-        keys = initialization.value
+        password = random_password.default_root_password.result
+        keys     = initialization.value
+      }
+
+      ip_config {
+        ipv4 {
+          address = "dhcp"
+        }
+
+        ipv6 {
+          address = "dhcp"
+        }
       }
     }
   }
+}
+
+resource "random_password" "default_root_password" {
+  length           = 16
+  override_special = "_%@"
+  special          = true
 }

@@ -1,10 +1,9 @@
 module "home_assistant_vm" {
   source = "../modules/vm"
+  node   = var.node
+  pool   = var.pool
 
   name = "home-assistant"
-  node = var.node
-
-  pool = var.pool
 
   cores  = 4
   memory = 8192

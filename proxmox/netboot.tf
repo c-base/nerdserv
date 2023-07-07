@@ -1,10 +1,9 @@
 module "netboot_vm" {
   source = "../modules/vm"
+  node   = var.node
+  pool   = var.pool
 
   name = "netboot"
-
-  node = var.node
-  pool = var.pool
 
   clone = data.proxmox_virtual_environment_vm.debian_cloud_vm_template.vm_id
 
@@ -22,6 +21,6 @@ module "netboot_vm" {
   }
 
   ssh_keys = [
-    var.users["saces"].ssh_key
+    var.users["saces"].ssh_key,
   ]
 }

@@ -25,6 +25,12 @@ variable "cores" {
   description = "how many cores the VM should have"
 }
 
+variable "machine" {
+  type        = string
+  default     = "q35"
+  description = "qemu machine type"
+}
+
 variable "memory" {
   type        = number
   description = "how much memory should be available to the VM"
@@ -67,4 +73,10 @@ variable "template" {
   type        = bool
   default     = false
   description = "mark the vm as a template"
+}
+
+variable "started" {
+  type        = bool
+  default     = true
+  description = "start the VM after creation"
 }
