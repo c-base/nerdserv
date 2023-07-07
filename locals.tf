@@ -18,5 +18,6 @@ locals {
   storage = {
     disk     = "data"
     template = "local"
+    snippets = "config"
   }
 }

@@ -1,17 +1,18 @@
-module "docker_lxc" {
-  source = "../modules/lxc"
+module "docker_vm" {
+  source = "../modules/vm"
+  node   = var.node
+  pool   = var.pool
 
   name = "docker"
-  node = var.node
 
-  pool = var.pool
+  clone = data.proxmox_virtual_environment_vm.debian_cloud_vm_template.vm_id
 
   cores  = 4
-  memory = 4096
+  memory = 8192
 
   disk = {
     // gigabytes
-    size    = 32
+    size    = 64
     storage = var.storage.disk
   }
 
@@ -19,12 +20,7 @@ module "docker_lxc" {
     bridge = var.network.bridge
   }
 
-  operating_system = {
-    template_file_id = proxmox_virtual_environment_file.alpine_cloud_template.id
-    type             = "alpine"
-  }
-
   ssh_keys = [
-    var.users["hrmny"].ssh_key
+    var.users["hrmny"].ssh_key,
   ]
 }

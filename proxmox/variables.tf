@@ -13,6 +13,7 @@ variable "storage" {
   type = object({
     disk     = string
     template = string
+    snippets = string
   })
   description = "the storage configuration"
 }

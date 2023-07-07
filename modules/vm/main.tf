@@ -92,7 +92,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
       datastore_id = var.disk.storage
 
       # this is necessary when using machine type q35 or ovmf bios
-      interface    = "scsi1"
+      interface = "scsi1"
 
       user_account {
         password = random_password.default_root_password.result
