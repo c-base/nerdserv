@@ -22,7 +22,7 @@ module "docker_vm" {
     internal_bridge = proxmox_virtual_environment_network_linux_bridge.internal_bridge.name
   }
 
-  ssh_keys = [
-    var.users["hrmny"].ssh_key,
+  admins = [
+    local.users["hrmny"]
   ]
 }
