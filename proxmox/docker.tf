@@ -3,7 +3,7 @@ module "docker_vm" {
   node   = var.node
   pool   = var.pool
 
-  name = "docker"
+  name  = "docker"
   vm_id = "101"
 
   clone = data.proxmox_virtual_environment_vm.debian_cloud_vm_template.vm_id
@@ -18,7 +18,7 @@ module "docker_vm" {
   }
 
   network = {
-    bridge = var.network.bridge
+    bridge          = var.network.bridge
     internal_bridge = proxmox_virtual_environment_network_linux_bridge.internal_bridge.name
   }
 
