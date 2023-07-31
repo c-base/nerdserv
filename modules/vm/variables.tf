@@ -11,8 +11,11 @@ variable "pool" {
 
 variable "vm_id" {
   type        = string
-  default     = null
   description = "set a specific ID for the VM"
+  validation {
+    condition = var.vm_id != null && var.vm_id != ""
+    error_message = "vm_id needs to be a non empty string"
+  }
 }
 
 variable "name" {
@@ -47,6 +50,7 @@ variable "disk" {
 variable "network" {
   type = object({
     bridge = string
+    internal_bridge = string
   })
   description = "network config containing the bridge network"
 }

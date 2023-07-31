@@ -2,7 +2,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "ForsakenHarmony/proxmox"
-      version = "0.0.0-canary.16"
+      version = "0.0.0-canary.17"
     }
   }
 }
@@ -76,6 +76,11 @@ resource "proxmox_virtual_environment_vm" "vm" {
     model  = "virtio"
   }
 
+  network_device {
+    bridge = var.network.internal_bridge
+    model  = "virtio"
+  }
+
   started = var.started
 
   dynamic "clone" {
@@ -106,6 +111,13 @@ resource "proxmox_virtual_environment_vm" "vm" {
 
         ipv6 {
           address = "dhcp"
+        }
+      }
+
+      ip_config {
+        ipv4 {
+          address = "10.23.42.${var.vm_id}/24"
+          gateway = "10.23.42.1"
         }
       }
     }

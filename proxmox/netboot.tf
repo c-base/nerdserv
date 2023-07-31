@@ -4,6 +4,7 @@ module "netboot_vm" {
   pool   = var.pool
 
   name = "netboot"
+  vm_id = "102"
 
   clone = data.proxmox_virtual_environment_vm.debian_cloud_vm_template.vm_id
 
@@ -18,6 +19,7 @@ module "netboot_vm" {
 
   network = {
     bridge = var.network.bridge
+    internal_bridge = proxmox_virtual_environment_network_linux_bridge.internal_bridge.name
   }
 
   ssh_keys = [

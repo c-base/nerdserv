@@ -4,6 +4,7 @@ module "home_assistant_vm" {
   pool   = var.pool
 
   name = "home-assistant"
+  vm_id = "100"
 
   cores  = 4
   memory = 8192
@@ -16,5 +17,6 @@ module "home_assistant_vm" {
 
   network = {
     bridge = var.network.bridge
+    internal_bridge = proxmox_virtual_environment_network_linux_bridge.internal_bridge.name
   }
 }
