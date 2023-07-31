@@ -23,11 +23,16 @@ resource "proxmox_virtual_environment_user" "ijon" {
 }
 
 resource "proxmox_virtual_environment_user" "member" {
-  for_each = local.users
-  user_id  = each.value.username
+  for_each = var.users
+  user_id  = "${each.key}@ldap"
 }
 
 // add pve username to user object
 locals {
-  users = { for name, user in var.users : name => { username = "${name}@ldap", ssh_key = user.ssh_key } }
+  users = {
+    for name, user in var.users : name => {
+      username = proxmox_virtual_environment_user.member[name].user_id
+      ssh_key  = user.ssh_key
+    }
+  }
 }
