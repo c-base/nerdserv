@@ -19,4 +19,8 @@ module "home_assistant_vm" {
     bridge          = var.network.bridge
     internal_bridge = proxmox_virtual_environment_network_linux_bridge.internal_bridge.name
   }
+
+  admins = [
+    local.users["hrmny"]
+  ]
 }

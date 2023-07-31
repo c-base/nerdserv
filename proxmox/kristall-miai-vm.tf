@@ -22,7 +22,7 @@ module "kristall-miai_vm" {
     internal_bridge = proxmox_virtual_environment_network_linux_bridge.internal_bridge.name
   }
 
-  ssh_keys = [
-    var.users["kristall"].ssh_key,
+  admins = [
+    local.users["kristall"]
   ]
 }

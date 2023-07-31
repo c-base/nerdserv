@@ -67,10 +67,11 @@ variable "clone" {
   description = "clone the vm with the given ID"
 }
 
-variable "ssh_keys" {
-  type        = list(string)
-  default     = null
-  description = "clone the vm with the given ID"
+variable "admins" {
+  type = list(object({
+    username = string
+    ssh_key  = string
+  }))
 }
 
 variable "template" {

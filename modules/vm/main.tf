@@ -91,38 +91,44 @@ resource "proxmox_virtual_environment_vm" "vm" {
     }
   }
 
-  dynamic "initialization" {
-    for_each = var.ssh_keys != null ? [var.ssh_keys] : []
-    content {
-      datastore_id = var.disk.storage
+  initialization {
+    datastore_id = var.disk.storage
 
-      # this is necessary when using machine type q35 or ovmf bios
-      interface = "scsi1"
+    # this is necessary when using machine type q35 or ovmf bios
+    interface = "scsi1"
 
-      user_account {
-        password = random_password.default_root_password.result
-        keys     = initialization.value
+    user_account {
+      password = random_password.default_root_password.result
+      keys     = [for _, user in var.admins : user.ssh_key]
+    }
+
+    ip_config {
+      ipv4 {
+        address = "dhcp"
       }
 
-      ip_config {
-        ipv4 {
-          address = "dhcp"
-        }
-
-        ipv6 {
-          address = "dhcp"
-        }
+      ipv6 {
+        address = "dhcp"
       }
+    }
 
-      ip_config {
-        ipv4 {
-          address = "10.23.42.${var.vm_id}/24"
-          gateway = "10.23.42.1"
-        }
+    ip_config {
+      ipv4 {
+        address = "10.23.42.${var.vm_id}/24"
+        gateway = "10.23.42.1"
       }
     }
   }
 }
+
+resource "proxmox_virtual_environment_acl" "admin_acl" {
+  for_each = { for user in var.admins : user.username => user }
+
+  user_id = each.value.username
+  role_id = "VMUser"
+  path    = "/vms/${proxmox_virtual_environment_vm.vm.vm_id}"
+}
+
 
 resource "random_password" "default_root_password" {
   length           = 16
