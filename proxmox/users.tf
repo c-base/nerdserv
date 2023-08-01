@@ -4,22 +4,24 @@ data "proxmox_virtual_environment_role" "admin_role" {
 
 resource "proxmox_virtual_environment_user" "hrmny" {
   user_id = "hrmny@pam"
+}
 
-  acl {
-    path      = "/"
-    propagate = true
-    role_id   = data.proxmox_virtual_environment_role.admin_role.role_id
-  }
+resource "proxmox_virtual_environment_acl" "hrmny_admin" {
+  user_id   = "hrmny@pam"
+  path      = "/"
+  propagate = true
+  role_id   = data.proxmox_virtual_environment_role.admin_role.role_id
 }
 
 resource "proxmox_virtual_environment_user" "ijon" {
   user_id = "ijon@pam"
+}
 
-  acl {
-    path      = "/"
-    propagate = true
-    role_id   = data.proxmox_virtual_environment_role.admin_role.role_id
-  }
+resource "proxmox_virtual_environment_acl" "ijon_admin" {
+  user_id   = "ijon@pam"
+  path      = "/"
+  propagate = true
+  role_id   = data.proxmox_virtual_environment_role.admin_role.role_id
 }
 
 resource "proxmox_virtual_environment_user" "member" {
