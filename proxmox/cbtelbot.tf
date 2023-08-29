@@ -1,4 +1,4 @@
-module "netboot_vm" {
+module "cbtelbot_vm" {
   source = "../modules/vm"
   node   = var.node
   pool   = var.pool
