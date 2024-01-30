@@ -27,6 +27,24 @@ deb http://ftp.debian.org/debian bookworm-backports main contrib non-free
 deb http://ftp.debian.org/debian bookworm non-free-firmware
 ```
 
+### Foward port 80 and 443 to the docker VM for traefik
+
+`/etc/nftables.conf`
+```
+table ip nat {
+	chain PREROUTING {
+		type nat hook prerouting priority dstnat; policy accept;
+		iifname "vmbr0" tcp dport 80 counter packets 4 bytes 256 dnat to 10.23.42.101:80
+		iifname "vmbr0" tcp dport 443 counter packets 506 bytes 31454 dnat to 10.23.42.101:443
+	}
+
+	chain POSTROUTING {
+		type nat hook postrouting priority srcnat; policy accept;
+		masquerade
+	}
+}
+```
+
 ## Custom Services
 
 ### Terraform Cloud Agent
