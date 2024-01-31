@@ -2,46 +2,48 @@
 
 Configuration for all VMs / Containers running on nerdserv using Terraform
 
-## Prerequisites
+## How to get a (debian) VM
 
-### Terraform
+1. Add your ssh key to `locals.tf` in the root of the directory.
+    ```tf
+    locals {
+      users = {
+        // ... snip ...
+        your_membername = {
+          ssh_key = "your ssh-key here"
+        }
+      }
+      // ... snip ...
+    }
+    ```
+2. Create a new file in the `proxmox` directory named `{your_vm_name}.tf`
+    ```tf
+    module "<your_vm_name>_vm" {
+      source = "../modules/vm"
+      node   = var.node
+      pool   = var.pool
 
-We recommend using the
-[Terraform version manager](https://github.com/tfutils/tfenv) to install the
-correct version of `terraform` for this project.
+      name  = "docker"
+      vm_id = "<this needs to be the next free vm_id>"
 
-```bash
-tfenv install
-```
+      clone = data.proxmox_virtual_environment_vm.debian_cloud_vm_template.vm_id
 
-### Encryption Key
+      cores  = <how many (virtual) cores you need>
+      memory = <how much memory you need in MB>
 
-You will need the team’s `age` encryption key to run the encryption and
-decryption steps for the Terraform state files.
+      disk = {
+        // gigabytes
+        size    = <how much storage you need in GB>
+        storage = var.storage.disk
+      }
 
-## Usage
+      network = {
+        bridge          = var.network.bridge
+        internal_bridge = proxmox_virtual_environment_network_linux_bridge.internal_bridge.name
+      }
 
-The [proxmox provider](https://registry.terraform.io/providers/Telmate/proxmox/latest/docs)
-allows Terraform to provision proxmox VMs and LXC containers through proxmox's API.
-
-### Work with the Config
-
-1. If you have not done so, initialize Terraform by running
-   `terraform init`.
-
-2. Validate the config BEFORE committing.
-
-   ```bash
-   terraform validate
-   ```
-
-3. Format the Terraform config files BEFORE committing.
-
-   ```bash
-   make format
-   ```
-
-4. Commit the changes and create a pull request, Terraform cloud should pick it
-   up and create a plan.
-
-5. Merge the pull request, everything will get applied to
+      admins = [
+        local.users["your_membername"]
+      ]
+    }
+    ```
