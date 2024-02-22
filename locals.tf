@@ -12,9 +12,6 @@ locals {
     uk = {
       ssh_key = "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAv7oiARyDwODSIDc+vd5mm6i+081S2JicAJTTDXzRrapNjiCKlZU8twNUiSrvnuL+RMobM4ybHwv0ooib785Ai9TT/Mh4pGIa2NLJbs4cRJFmeDHpoIbLPlNFaffU9vMk9oQBd9+GZdhml0x/z5o6mTmI2qjzfklvo7eKkrJ/ytLIWSBqX6R77uX5D+5gGWi2TYsZcEgq1pYspE3KZrHzxwFWOF1+PL6zsMiKm/oVsWBQk6Y28E66cG5mpB07FDWTeoMqP23poCyom7Mzg2P7FUtsepLoBfLW5JEu8Ti4vCNfoeA10dS1lr6VlMenUqnM/f51DzCbVM4fx0Sn/zXE0aWxhGxInXjwPOdrhiOMCY+bGeTqs+kaP9eJlrP/ZlG2JDTlc2P9wJSbZAPl0LpQuL/sOBPbUiGHiyRFnV5LLEgSLH1xhEsvqIXYrLJNgaRpVJBHZpO1GB0vTbnwRVaB6kDbjiahOhz5DX9wAM/eyenYSmbpvJ6fxb6bHRRtuwx//qpH5CN/Owp7+fjYk6X8KzB2kxD4cjbE4ZDQwwQABYoAQIj6kpBb3MlYNy4FipTHy+cNd0HCE+pxyUWziyG9T/sZmBCpOQ3wifDmtsc2t5TlbcQvFuklwpEoQxyGNkHtD4fB60y+Yhvco5rAwps2FRlV2iloPqVwJp0bQ9/KEsU= uwekamper@birne.lan"
     }
-    mecci = {
-      ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC30U/e79pjCltM4WZ7Jlr3J0NjdEgbcBSz4YCuiq90f mecci@c-base.org"
-    }
   }
 
   node = "nerdserv"
