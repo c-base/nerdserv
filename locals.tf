@@ -15,7 +15,6 @@ locals {
     mecci = {
       ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC30U/e79pjCltM4WZ7Jlr3J0NjdEgbcBSz4YCuiq90f mecci@c-base.org"
     }
-
   }
 
   node = "nerdserv"
