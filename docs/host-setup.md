@@ -4,7 +4,7 @@
 
 ### Post Install
 
-Source: https://github.com/tteck/Proxmox/blob/d8b78777752f8727bc64b0f256b62633934741fa/misc/post-pve-install.sh
+Source: https://github.com/tteck/Proxmox/blob/f5f28231a74693eea6a38dea2b6476e2fb0317a8/misc/post-pve-install.sh
 
 - disables Enterprise Repo
 - adds no-subscription & test repos
