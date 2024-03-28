@@ -28,6 +28,12 @@ variable "cores" {
   description = "how many cores the VM should have"
 }
 
+variable "weight" {
+  type        = number
+  default     = 1024
+  description = "CPU shares/weight (defaults to 1024)"
+}
+
 variable "machine" {
   type        = string
   default     = "q35"
