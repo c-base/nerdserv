@@ -25,8 +25,8 @@ resource "proxmox_virtual_environment_vm" "vm" {
   }
 
   memory {
-    dedicated = min(1024, var.memory)
-    floating  = var.memory
+    dedicated = var.memory
+    floating  = min(1024, var.memory)
   }
 
   bios       = "ovmf"
