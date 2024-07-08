@@ -15,6 +15,9 @@ locals {
     mecci = {
       ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILFaAXNhs2IkZQd059lPM+3h03siLRBJRBD8ouiAxsvL mecci@c-base.org"
     }
+    phelix = {
+      ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINeEBqbuKi5aOXwVEaEVCEPE8g1g1su+FxSPPswmEFaw phelix@c-base.org"
+    }
 
   }
 
