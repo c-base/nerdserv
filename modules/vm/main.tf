@@ -2,7 +2,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "ForsakenHarmony/proxmox"
-      version = "0.0.0-canary.6523af7d"
+      version = "0.0.0-canary.46302975"
     }
   }
 }
@@ -17,11 +17,11 @@ resource "proxmox_virtual_environment_vm" "vm" {
   name = var.name
 
   cpu {
-    cores = var.cores
-    // "x86-64-v2-AES" is best if live migration is needed
-    type  = "host"
-    numa  = true
-    units = var.weight
+    architecture = "x86_64"
+    cores        = var.cores
+    type         = "host" // "x86-64-v2-AES" is best if live migration is needed
+    numa         = true
+    units        = var.weight
   }
 
   memory {
@@ -47,8 +47,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
   # disable because we don't have an xserver
   tablet_device = false
   vga {
-    enabled = true
-    type    = "std"
+    type = "std"
   }
 
   scsi_hardware = "virtio-scsi-single"
