@@ -45,12 +45,16 @@ variable "memory" {
   description = "how much memory should be available to the VM"
 }
 
-variable "disk" {
-  type = object({
-    size    = string
+variable "disks" {
+  type = list(object({
+    size_gb = number
     storage = string
-  })
-  description = "the disk size and storage"
+  }))
+  description = "sizes and storage for all disks"
+  validation {
+    condition     = length(var.disks) != 0
+    error_message = "should have at least one disk configured"
+  }
 }
 
 variable "network" {
@@ -78,6 +82,10 @@ variable "admins" {
     username = string
     ssh_key  = string
   }))
+  validation {
+    condition     = length(var.admins) != 0
+    error_message = "should have at least one admin configured"
+  }
 }
 
 variable "template" {

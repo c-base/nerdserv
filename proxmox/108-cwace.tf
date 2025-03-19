@@ -11,11 +11,10 @@ module "cwace" {
 
   clone = data.proxmox_virtual_environment_vm.debian_cloud_vm_template.vm_id
 
-  disk = {
-    // gigabytes
-    size    = 32
+  disks = [{
+    size_gb = 32
     storage = var.storage.disk
-  }
+  }]
 
   network = {
     bridge          = var.network.bridge
