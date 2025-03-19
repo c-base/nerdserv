@@ -9,11 +9,12 @@ module "home_assistant_vm" {
   cores  = 4
   memory = 8192
 
-  disk = {
-    // gigabytes
-    size    = 64
-    storage = var.storage.disk
-  }
+  disks = [
+    {
+      size_gb = 64
+      storage = var.storage.disk
+    }
+  ]
 
   network = {
     bridge          = var.network.bridge

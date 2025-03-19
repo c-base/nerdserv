@@ -12,11 +12,10 @@ module "ci_runners_vm" {
   memory = 4096
   weight = 128
 
-  disk = {
-    // gigabytes
-    size    = 32
+  disks = [{
+    size_gb = 32
     storage = var.storage.disk
-  }
+  }]
 
   network = {
     bridge          = var.network.bridge

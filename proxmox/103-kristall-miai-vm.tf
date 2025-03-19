@@ -11,11 +11,10 @@ module "kristall-miai_vm" {
   cores  = 6
   memory = 36864
 
-  disk = {
-    // gigabytes
-    size    = 15
+  disks = [{
+    size_gb = 15
     storage = var.storage.disk
-  }
+  }]
 
   network = {
     bridge          = var.network.bridge

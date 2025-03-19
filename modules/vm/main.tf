@@ -54,22 +54,25 @@ resource "proxmox_virtual_environment_vm" "vm" {
   scsi_hardware = "virtio-scsi-single"
 
   # data disk
-  disk {
-    size         = var.disk.size
-    datastore_id = var.disk.storage
+  dynamic "disk" {
+    for_each = var.disks
+    content {
+      size         = disk.value["size_gb"]
+      datastore_id = disk.value["storage"]
 
-    file_format = "raw"
+      file_format = "raw"
 
-    interface = "scsi0"
+      interface = "scsi0"
 
-    iothread = true
-    ssd      = true
-    discard  = "on"
+      iothread = true
+      ssd      = true
+      discard  = "on"
+    }
   }
 
   # efi disk
   efi_disk {
-    datastore_id = var.disk.storage
+    datastore_id = var.disks[0].storage
     type         = "4m"
   }
 
@@ -88,16 +91,16 @@ resource "proxmox_virtual_environment_vm" "vm" {
   dynamic "clone" {
     for_each = var.clone != null ? [var.clone] : []
     content {
-      datastore_id = var.disk.storage
+      datastore_id = var.disks[0].storage
       vm_id        = clone.value
     }
   }
 
   initialization {
-    datastore_id = var.disk.storage
+    datastore_id = var.disks[0].storage
 
     # this is necessary when using machine type q35 or ovmf bios
-    interface = "scsi1"
+    interface = "scsi23"
 
     user_account {
       password = random_password.default_root_password.result

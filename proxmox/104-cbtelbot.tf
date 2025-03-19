@@ -11,11 +11,10 @@ module "cbtelbot_vm" {
   cores  = 1
   memory = 1024
 
-  disk = {
-    // gigabytes
-    size    = 48
+  disks = [{
+    size_gb = 48
     storage = var.storage.disk
-  }
+  }]
 
   network = {
     bridge          = var.network.bridge
