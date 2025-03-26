@@ -61,7 +61,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
 
       file_format = "raw"
 
-      interface = "scsi0"
+      interface = "scsi${disk.key}"
 
       iothread = true
       ssd      = true
