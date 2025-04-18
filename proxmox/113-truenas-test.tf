@@ -3,7 +3,7 @@ module "truenast_test_vm" {
   node   = var.node
   pool   = var.pool
 
-  name  = "saces-misc-services"
+  name  = "truenas-test"
   vm_id = "113"
 
   clone = data.proxmox_virtual_environment_vm.debian_cloud_vm_template.vm_id
