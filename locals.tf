@@ -18,6 +18,9 @@ locals {
     phelix = {
       ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINeEBqbuKi5aOXwVEaEVCEPE8g1g1su+FxSPPswmEFaw phelix@c-base.org"
     }
+    yosijo = {
+      ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJuejyEJmGNjgly1PpmQPTZw2PwrWFG1oyW0cG+7+shS yosijo@c-base.org"
+    }
 
   }
 
