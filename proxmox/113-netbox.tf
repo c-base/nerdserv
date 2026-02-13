@@ -1,22 +1,20 @@
-module "netbox" {
-  source = "../modules/lxc"
+module "yosijo_netbox_vm" {
+  source = "../modules/vm"
   node   = var.node
   pool   = var.pool
 
   name  = "netbox"
   vm_id = "113"
 
-  operating_system {
-    template_file_id = proxmox_virtual_environment_download_file.debian_13_lxc_img.id
-    type = "debian"
-  }
+  clone = data.proxmox_virtual_environment_vm.debian_cloud_vm_template.vm_id
+
   cores  = 4
   memory = 8192
 
   disks = [
     {
-      storage = rootfs
-      size_gb = 32
+      size_gb = 64
+      storage = var.storage.disk
     }
   ]
 
@@ -25,5 +23,7 @@ module "netbox" {
     internal_bridge = proxmox_virtual_environment_network_linux_bridge.internal_bridge.name
   }
 
-  ssh_keys = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJuejyEJmGNjgly1PpmQPTZw2PwrWFG1oyW0cG+7+shS yosijo@c-base.org"
+  admins = [
+    local.users["yosijo"]
+  ]
 }
