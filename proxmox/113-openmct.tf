@@ -1,4 +1,4 @@
-module "mecci_vm" {
+module "openmct_vm" {
   source = "../modules/vm"
   node   = var.node
   pool   = var.pool
