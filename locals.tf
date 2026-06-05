@@ -18,7 +18,9 @@ locals {
     phelix = {
       ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINeEBqbuKi5aOXwVEaEVCEPE8g1g1su+FxSPPswmEFaw phelix@c-base.org"
     }
-
+    lazee = {
+      ssh_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC3DNmSYPZRCm0h6FxZFtpZeBtJlywiTX/k6A+sF6Tse9UP9eB+DV//nkxtnM8PoNQmMoiwSiBuGtqHivX3ky9p1OsLbeyTOmIa6D28Epxl+iSTBp2+XMDahclqIJKla4maz/bweIM6sh5HU69CKDeg1rNXSPDcJ6iPE+IvOKnb8vYeTnK+bPQ+kZQT+QEFJwCPWRAujJgOauOV9KjapkX5eJqnRi7HwyBqn7i0p/PE9EJ6fFxNQmJRGasJuenvFezHBhKfpnSdWN/ama1KEeFAr0X4aMme/4EfT8ciKwVDy9vN5ZIvVdolHIV+EKIHs/SOUc3Qf2qhvyLAkcVYh4WBJAdGfwur7N7YSnYYayETmQRxsm9S38+OKn1UkI6tGMO1f1L1AwyB6qnphtDaAZG2N8lvCE5kya3YLzizTNJHtd4Mr7Zgi7iXePVzoj4RW/5/YpJxKmsIg59wxPKLUfstBrZIR0MUKdtF7o+KKqJoV/vcyHE451vtukeXbYZxEmH1fIR6hQSHc+BFyR8LP/gKvsrtpdGG/Rs+MFJKsUAivwgcXreRSOlacLyd8ltbdHvKifIm2MWdvhubhngeMNrD/r8Jv9H2MUWaCUGJ5/gxE4rBXE/99LivROObxaUN4drsVaapnUUZAp80N2xwXMMzjiagsRayI95qtdRCvsWpcw== lazee@c-base.org"
+    }
   }
 
   node = "nerdserv"
