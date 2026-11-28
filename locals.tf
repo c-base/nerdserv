@@ -24,6 +24,9 @@ locals {
     riot = {
       ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRXwj1OmwGJp6V/FmIbiKyyluF402b7eDTTCryhBZ9c riot@vortex"
     }
+    ijon = {
+      ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOSaPglJ5TFjcOxSHx5O364bTn+ivuBxHWa54YPyhR14 libreflip-data-vm"
+    }
   }
 
   node = "nerdserv"
